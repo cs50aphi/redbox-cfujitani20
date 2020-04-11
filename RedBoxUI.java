@@ -61,8 +61,8 @@ public class RedBoxUI
          {
             System.out.println("What movie would you like to search for?");
             title = sn.nextLine();
-            int find = rm.searchForMovie(title);
-            if (find != -1 )
+
+            if (rm.searchForMovie(title) >= 0)
             {
                System.out.println("Movie has been found!");
             }

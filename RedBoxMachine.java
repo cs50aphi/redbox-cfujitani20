@@ -82,10 +82,9 @@ public class RedBoxMachine
          if (library.get(l).getTitle().equals(title));
          {
             library.get(l).decrementCopies();
-            num = library.get(l).getNumCopies();
-            if (num == 0)
+            if (library.get(l).getNumCopies() == 0)
             {
-               library.remove(library.get(l));
+               library.remove(searchForMovie(title));
             }
             return true;
          }
@@ -102,15 +101,14 @@ public class RedBoxMachine
     */
    public DVD returnMovie(String title)
    {
-      for (int k = 0; k < library.size(); k++)
+      if (searchForMovie(title) >= 0)
       {
-         if (library.get(k).getTitle().equals(title))
-         {
-            library.get(k).incrementCopies();
-            return library.get(k);
-         }
+         library.get(searchForMovie(title)).incrementCopies();
       }
-      library.add(new DVD(title));
+      else
+      {
+         library.add(new DVD(title));
+      }
       return library.get(searchForMovie(title));
    }
    /** This method fills the machine with movies. You do not have
