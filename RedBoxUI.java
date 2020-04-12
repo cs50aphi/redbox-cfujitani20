@@ -35,6 +35,7 @@ public class RedBoxUI
          {
             System.out.println("What movie would you like to rent?");
             title = sn.nextLine();
+            // rent movie if is in stock 
             if (rm.rent(title) == true)
             {
                System.out.println("Rent successful! Thank you for renting " + title);
@@ -51,6 +52,7 @@ public class RedBoxUI
          {
             System.out.println("What movie would you like to return?");
             title = sn.nextLine();
+            // return movie
             rm.returnMovie(title);
             System.out.println("Movie returned!");
             // Complete the code to return a movie. Make sure to include a

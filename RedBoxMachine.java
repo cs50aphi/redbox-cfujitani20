@@ -39,13 +39,16 @@ public class RedBoxMachine
 
    public int searchForMovie(String title)
    {
-      for (int i = 0; i > library.size(); i++ )
+      // for loop to check each index of the array list to search for movie title
+      for (int i = 0; i < library.size(); i++ )
       {
          if ( library.get(i).getTitle().equals(title))
          {
+            // return movie from index
             return i;
          }
       }
+      // return -1 if movie is not in stock
       return -1;
       // Complete the method to search for a movie.
       // If placement is -1, then the movie isn't there.
@@ -59,8 +62,9 @@ public class RedBoxMachine
     */
    public ArrayList<String> getAvailableMovies()
    {
+      // arraylist to scan array list for movie and place in temp to check if it can be removed
       ArrayList<String> temp = new ArrayList<String>();
-      for (int p = 0; p > library.size(); p++)
+      for (int p = 0; p < library.size(); p++)
       {
          temp.add(library.get(p).getTitle());
       }
@@ -77,10 +81,12 @@ public class RedBoxMachine
     */
    public boolean rent(String title)
    {
-      for (int l = 0; l > library.size(); l++)
+      // for loop to search
+      for (int l = 0; l < library.size(); l++)
       {
          if (library.get(l).getTitle().equals(title));
          {
+            // if movie is found decrease copies and remove if titles > 0
             library.get(l).decrementCopies();
             if (library.get(l).getNumCopies() == 0)
             {
@@ -89,6 +95,8 @@ public class RedBoxMachine
             return true;
          }
       }
+      // return false if not possible
+
       return false;
       // Complete the method to rent a movie.
    }
@@ -101,12 +109,14 @@ public class RedBoxMachine
     */
    public DVD returnMovie(String title)
    {
+      // search for movie and if less than 0 then incrase movie by 1
       if (searchForMovie(title) >= 0)
       {
          library.get(searchForMovie(title)).incrementCopies();
       }
       else
       {
+         // if not found before add new title
          library.add(new DVD(title));
       }
       return library.get(searchForMovie(title));
