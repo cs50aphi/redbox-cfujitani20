@@ -16,7 +16,7 @@ public class RedBoxUI
       System.out.println("Welcome to Redbox!");
       System.out.println("What can I help you with today?");
       System.out.println();
-      
+
       while(true)
       {
          printMenu();
@@ -27,15 +27,23 @@ public class RedBoxUI
             ArrayList<String> availableTitles = new ArrayList<String>();
             availableTitles = rm.getAvailableMovies();
             System.out.println(availableTitles);
-      
+
             System.out.println("PRESS ENTER TO GO BACK TO THE MENU");
-            sn.nextLine();         
+            sn.nextLine();
          }
          else if(option == 2)
          {
             System.out.println("What movie would you like to rent?");
             title = sn.nextLine();
-
+            // rent movie if is in stock 
+            if (rm.rent(title) == true)
+            {
+               System.out.println("Rent successful! Thank you for renting " + title);
+            }
+            else
+            {
+               System.out.println("Movie is unavailable, select another movie :(");
+            }
             // Complete the code to rent a movie. This code should let the user
             // know if the movie was rented successfully or not (not could occur if
             // the movie they enter is not available).
@@ -44,19 +52,29 @@ public class RedBoxUI
          {
             System.out.println("What movie would you like to return?");
             title = sn.nextLine();
-            
+            // return movie
+            rm.returnMovie(title);
+            System.out.println("Movie returned!");
             // Complete the code to return a movie. Make sure to include a
             // message after the movie has been returned.
-         
+
          }
          else if(option == 4)
          {
             System.out.println("What movie would you like to search for?");
             title = sn.nextLine();
-            
+
+            if (rm.searchForMovie(title) >= 0)
+            {
+               System.out.println("Movie has been found!");
+            }
+            else
+            {
+               System.out.println("Movie could not be found in stock :(");
+            }
             // Complete the code to search for a movie.  Make sure to include
             // messages that inform the user whether the movie was found or not.
-         
+
          }
          else if(option == 5)
          {
@@ -70,7 +88,7 @@ public class RedBoxUI
          }
       }
    }
-   
+
    //Prints all available options to the console.
    public static void printMenu()
    {
